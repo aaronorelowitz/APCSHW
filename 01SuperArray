@@ -1,0 +1,50 @@
+public class SuperArray{
+    Object[] stuff;
+    int currentLength;
+
+    public SuperArray(){
+	stuff = new Object[10];
+    }
+    
+    public SuperArray(int length){
+       	stuff = new Object[length];
+    }
+
+    public String toString(){
+	String ans = "[ ";
+	for (int i = 0; i < stuff.length; i++){
+	    ans = ans + stuff[i] + " ";
+	}
+	ans = ans + "]";
+	return ans;
+    }
+
+    public void add(Object e){
+	    for (int i = 0; i < stuff.length; i++){
+		if (stuff[i] == null){
+		    stuff[i] = e;
+		    i = stuff.length;
+	    }
+	    }
+    }
+
+    public int size(){
+	int ans = 0;
+	for (int i = 0; i < stuff.length; i++){
+	    if (stuff[i] != null){
+		ans= ans + 1;
+	    }
+	}
+	return ans;
+    }
+
+    public static void main(String[]args){
+	SuperArray a = new SuperArray(5);
+	System.out.println(a);
+	System.out.println(a.size());
+	a.add("Test");
+	System.out.println(a);
+       	System.out.println(a.size());
+    }
+}
+
