@@ -74,16 +74,14 @@ public class SuperArray{
 
     public Object get(int index){
 	if(index < 0  || index >= size()){
-	    System.out.println("ERROR");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	return stuff[index];
     }
 
     public Object set(int index, Object e){
 	if( index < 0  || index >= size()){
-	    System.out.println("ERROR");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	Object a = stuff[index];
 	stuff[index] = e;
