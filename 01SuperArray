@@ -1,102 +1,129 @@
-public class WordGrid{
-    private char[][]data;
+public class SuperArray{
+    Object[] stuff;
+    int currentLength;
 
-    /**Initialize the grid to the size specified and fill all of the positions
-     *with spaces.
-     *@param row is the starting height of the WordGrid
-     *@param col is the starting width of the WordGrid
-     */
-    public WordGrid(int rows,int cols){
-	data = new char[rows][cols];
-	clear();
+    public SuperArray(){
+	stuff = new Object[10];
+    }
+    
+    public SuperArray(int length){
+       	stuff = new Object[length];
     }
 
-    /**Set all values in the WordGrid to spaces ' '*/
-    private void clear(){
-	for(int k = 0;k < data.length; k++){
-	    for (int j = 0; j < data[k].length; j++){
-		data[k][j] = ' ';
+    public String toString(){
+	String ans = "[ ";
+	for (int i = 0; i < stuff.length; i++){
+	    ans = ans + stuff[i] + " ";
+	}
+	ans = ans + "]";
+	return ans;
+    }
+
+    public void add(Object e){
+	if (size() == getLength()){
+	    resize(size() + 1);
+	}
+	    for (int i = 0; i < stuff.length; i++){
+		if (stuff[i] == null){
+		    stuff[i] = e;
+		    i = stuff.length;
 	    }
+	    }
+    }
+
+    public void add(int index, Object e){
+	if (size() == getLength()){
+	    resize(size() + 1);
+	}
+	if (e != null){
+	    Object a = get(index);
+	    stuff[index] = e;
+	    add(index + 1, a);
 	}
     }
 
-    /**The proper formatting for a WordGrid is created in the toString.
-     *@return a String with each character separated by spaces, and each row
-     *separated by newlines.
-     */
-    public String toString(){
-	String ans = "";
-	for(int k = 0;k < data.length; k++){
-	    ans = ans + "\n";
-	    for (int j = 0; j < data[k].length; j++){
-		ans = ans + " " + data[k][j];
+    public int size(){
+	int ans = 0;
+	for (int i = 0; i < stuff.length; i++){
+	    if (stuff[i] != null){
+		ans= ans + 1;
 	    }
 	}
 	return ans;
     }
 
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from left to right, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
-     */
-
-    public boolean addWordHorizontal(String word,int row, int col){
-	if (data[row].length - col < word.length()){
-	    return false;}
-	else{
-	    for (int i = 0;i < word.length(); i++){
-		if (data[row][col + i] != ' ' && data[row][col + i] != word.charAt(i))
-		    {return false;}}
-	    for (int k = 0;k < word.length(); k++){
-		data[row][col + k] = word.charAt(k);
-	    }
-	    return true;}
-
+    public void resize(int newCapacity){
+	Object[] copy = new Object[newCapacity];
+	if (stuff.length < copy.length){
+	    for (int i = 0; i < stuff.length; i++){
+		copy[i] = stuff[i];
+		    }
+	}else{
+	     for (int i = 0; i < copy.length; i++){
+		copy[i] = stuff[i];
+		    }
+	}
+	stuff = copy;
     }
 
-    public boolean addWordVertical(String word,int row, int col){
-	if (data[col].length - row < word.length()){
-	    return false;}
-	else{
-	    for (int i = 0;i < word.length(); i++){
-		if (data[row + i][col] != ' ' && data[row + i][col] != word.charAt(i))
-		    {return false;}}
-	    for (int k = 0;k < word.length(); k++){
-		data[row + k][col] = word.charAt(k);
-	    }
-	    return true;}
+    public void clear(){
+	for (int i = 0; i < stuff.length; i++){
+	    stuff[i] = null;
+	}
     }
 
-      public boolean addWordDiagonal(String word,int row, int col){
-	if (data[col].length - row < word.length() || data[row].length - col < word.length()){
-	    return false;}
-	else{
-	    for (int i = 0;i < word.length(); i++){
-		if (data[row + i][col + i] != ' ' && data[row + i][col + i] != word.charAt(i))
-		    {return false;}}
-	    for (int k = 0;k < word.length(); k++){
-		data[row + k][col + k] = word.charAt(k);
-	    }
-	    return true;}
+    public Object get(int index){
+	if(index < 0  || index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	return stuff[index];
     }
 
-    //vertical + diagonal should be implemented as well.
+    public Object set(int index, Object e){
+	if( index < 0  || index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+	Object a = stuff[index];
+	stuff[index] = e;
+	return a;	    
+    }
+
+    public Object remove(int index){
+	Object a = stuff[index];
+	Object[] copy = new Object[stuff.length];
+	for(int i = 0; i < index; i ++){
+	    copy[i] = stuff[i];}
+	for(int q = index + 1; q < stuff.length; q++){
+	    copy[q - 1] = stuff[q];}
+	stuff  = copy;
+	return a;
+    }
+
+    public int getLength(){
+	return stuff.length;
+    }
 
     public static void main(String[]args){
-	WordGrid A = new WordGrid(6, 6);
-	System.out.println(A);
-	A.addWordHorizontal("CAT", 0, 3);
-	A.addWordHorizontal("BOBCAT", 0, 0);
-	A.addWordVertical("BOY", 2, 4);
-	A.addWordVertical("BULL", 0, 0);
-	A.addWordVertical("COW", 0, 0);
-	A.addWordDiagonal("BUNNY", 0, 0);
-	System.out.println(A);}
+	SuperArray a = new SuperArray(5);
+	System.out.println(a);
+	System.out.println(a.size());
+	a.add("Test");
+	System.out.println(a);
+       	System.out.println(a.size());
+       	a.add("Blah");
+	System.out.println(a);
+       	System.out.println(a.size());
+	a.resize(3);
+	System.out.println(a);
+	a.add("Blah");
+	System.out.println(a);
+	a.add("Blah");
+	a.add("Blah");
+	System.out.println(a);	
+        a.add(2, "insertion");
+	System.out.println(a);	
+	a.remove(2);
+	System.out.println(a);
 
+    }
 }
