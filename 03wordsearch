@@ -45,10 +45,14 @@ public class WordGrid{
      *@return true when the word is added successfully. When the word doesn't fit,
      *or there are overlapping letters that do not match, then false is returned.
      */
+
     public boolean addWordHorizontal(String word,int row, int col){
 	if (data[row].length - col < word.length()){
 	    return false;}
 	else{
+	    for (int i = 0;i < word.length(); i++){
+		if (data[row][col + i] != ' ' && data[row][col + i] != word.charAt(i))
+		    {return false;}}
 	    for (int k = 0;k < word.length(); k++){
 		data[row][col + k] = word.charAt(k);
 	    }
@@ -56,6 +60,43 @@ public class WordGrid{
 
     }
 
+    public boolean addWordVertical(String word,int row, int col){
+	if (data[col].length - row < word.length()){
+	    return false;}
+	else{
+	    for (int i = 0;i < word.length(); i++){
+		if (data[row + i][col] != ' ' && data[row + i][col] != word.charAt(i))
+		    {return false;}}
+	    for (int k = 0;k < word.length(); k++){
+		data[row + k][col] = word.charAt(k);
+	    }
+	    return true;}
+    }
+
+      public boolean addWordDiagonal(String word,int row, int col){
+	if (data[col].length - row < word.length() || data[row].length - col < word.length()){
+	    return false;}
+	else{
+	    for (int i = 0;i < word.length(); i++){
+		if (data[row + i][col + i] != ' ' && data[row + i][col + i] != word.charAt(i))
+		    {return false;}}
+	    for (int k = 0;k < word.length(); k++){
+		data[row + k][col + k] = word.charAt(k);
+	    }
+	    return true;}
+    }
+
     //vertical + diagonal should be implemented as well.
+
+    public static void main(String[]args){
+	WordGrid A = new WordGrid(6, 6);
+	System.out.println(A);
+	A.addWordHorizontal("CAT", 0, 3);
+	A.addWordHorizontal("BOBCAT", 0, 0);
+	A.addWordVertical("BOY", 2, 4);
+	A.addWordVertical("BULL", 0, 0);
+	A.addWordVertical("COW", 0, 0);
+	A.addWordDiagonal("BUNNY", 0, 0);
+	System.out.println(A);}
 
 }
