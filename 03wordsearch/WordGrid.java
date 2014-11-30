@@ -3,11 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.*;
 public class WordGrid{
     private char[][]data;
-    private Random random = new Random();
+    private String usedWords; 
+    private Random random;
 
     public WordGrid(int rows,int cols){
 	data = new char[rows][cols];
 	clear();
+	usedWords = "";
+	random = new Random();
     }
 
     private void clear(){
@@ -30,6 +33,10 @@ public class WordGrid{
 	return ans;
     }
 
+    public String wordsInPuzzle(){
+	return usedWords;
+    }   
+
 
     public boolean addRandom( String word, int row, int col, int dx, int dy){
 	if (checkword(word ,row, col, dx, dy)){
@@ -37,6 +44,7 @@ public class WordGrid{
 		    data[row][col] = word.charAt(i);
 		    row = row + dy;
 		    col = col + dx;}
+		    usedWords = usedWords + "\n" +word;
 		return true;}
 	else{return false;}
     }
@@ -73,22 +81,6 @@ public class WordGrid{
 		data[K][J] = (char)('A' + (int)(Math.random()*26));
 	    }
 	}
-    }
-
-    public static void main(String[]args)throws FileNotFoundException{	
-	File text = new File("WordGrid.txt");
-        Scanner scnr = new Scanner(text);
-	ArrayList<String> Words = new ArrayList<String>();
-        while(scnr.hasNextLine()){
-            String line = scnr.nextLine();
-            Words.add(line);
-        }       
-	WordGrid A = new WordGrid(20, 20);
-	System.out.println(A);
-	A.addWords(Words);
-	System.out.println(A);
-	A.fillBlanks();
-	System.out.println(A);
     }
 
 }
