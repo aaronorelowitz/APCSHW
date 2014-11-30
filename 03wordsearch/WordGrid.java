@@ -83,4 +83,15 @@ public class WordGrid{
 	}
     }
 
+    public void loadWordsFromFile(String filename, boolean fillRandomLetters)throws FileNotFoundException{
+	File text = new File(filename);
+        Scanner scnr = new Scanner(text);
+	ArrayList<String> Words = new ArrayList<String>();
+        while(scnr.hasNextLine()){
+            String line = scnr.nextLine();
+            Words.add(line);}
+        addWords(Words);
+	if (fillRandomLetters){fillBlanks();}
+    }
+
 }
