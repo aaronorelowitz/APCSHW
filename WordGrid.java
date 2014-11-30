@@ -8,7 +8,7 @@ public class WordGrid{
 	data = new char[rows][cols];
 	clear();
     }
-
+ 
     private void clear(){
 	for(int k = 0;k < data.length; k++){
 	    for (int j = 0; j < data[k].length; j++){
