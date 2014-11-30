@@ -94,4 +94,7 @@ public class WordGrid{
 	if (fillRandomLetters){fillBlanks();}
     }
 
+    public void setSeed(long seed){
+	random.setSeed(seed);
+    }
 }
