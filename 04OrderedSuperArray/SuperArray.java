@@ -31,15 +31,18 @@ public class SuperArray{
 	    }
     }
 
-    public void add(int index, Object e){
-	if (size() == getLength()){
-	    resize(size() + 1);
+    public void add(int index, String o){
+	if(index < 0 || index > size() ){
+	    throw new IndexOutOfBoundsException();
+	}				
+	if(size() == stuff.length){
+	    resize( size() * 2 );
 	}
-	if (e != null){
-	    Object a = get(index);
-	    stuff[index] = e;
-	    add(index + 1, a);
+	for(int i = stuff.length - 1; i > index; i--){
+	    stuff[i] = stuff[i - 1];
 	}
+	stuff[ index ] = o;
+	;
     }
 
     public int size(){
@@ -120,7 +123,7 @@ public class SuperArray{
 	a.add("Blah");
 	a.add("Blah");
 	System.out.println(a);	
-  a.add(2, "insertion");
+	a.add(2, "insertion");
 	System.out.println(a);	
 	a.remove(2);
 	System.out.println(a);
