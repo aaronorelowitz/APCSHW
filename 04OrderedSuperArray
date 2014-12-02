@@ -24,15 +24,17 @@
 	if (size() == getLength()){
 	    resize(size() * 2);
 	}
-	for (int i = 0; i < stuff.length; i++){
-	    if (stuff[i].CompareTo(e) > 0){
+	for (int i = 0; i < size(); i++){
+	    if (stuff[i].compareTo(e) > 0){
 		spot = i;
-		i = stuff.length;}}
-	for (int q = spot; q < stuff.length; q++){
-	    stuff[q] = stuff[q -1];
+		i = stuff.length;
 	    }
+	}
+	for(int i = stuff.length - 1; i > spot; i--){
+	    stuff[i] = stuff[i - 1];
+	}
 	stuff[spot] = e;
-		    
+	
     }
 
     public void add(int index, String e){
@@ -88,7 +90,8 @@
 	    throw new IndexOutOfBoundsException();
 	}
 	String a = stuff[index];
-	stuff[index] = e;
+	remove(index);
+	add(e);
 	return a;	    
     }
 
@@ -125,6 +128,10 @@
 	a.add("Dog");
 	System.out.println(a);	
 	a.remove(2);
+	System.out.println(a);
+	a.set(1, "Joe");
+	System.out.println(a);
+	a.set(2, "Todd");
 	System.out.println(a);
 
     }
