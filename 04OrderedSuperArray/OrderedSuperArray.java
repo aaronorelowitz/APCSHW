@@ -1,4 +1,4 @@
- public class OrderedSuperArray{
+public class OrderedSuperArray extends SuperArray{
     String[] stuff;
     int currentLength;
 
@@ -38,14 +38,7 @@
     }
 
     public void add(int index, String e){
-	if (size() == getLength()){
-	    resize(size() * 2);
-	}
-	if (e != null){
-	    String a = get(index);
-	    stuff[index] = e;
-	    add(index + 1, a);
-	}
+	add(e);
     }
 
     public int size(){
