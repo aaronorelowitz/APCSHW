@@ -106,6 +106,10 @@ public class SuperArray{
 	return stuff.length;
     }
 
+    public static void insertionSort(){
+    }
+
+
     public static void main(String[]args){
 	SuperArray a = new SuperArray(5);
 	System.out.println(a);
@@ -118,14 +122,14 @@ public class SuperArray{
        	System.out.println(a.size());
 	a.resize(3);
 	System.out.println(a);
-	a.add("Blah");
+	a.add("Apple");
 	System.out.println(a);
-	a.add("Blah");
+	a.add("Bob");
 	a.add("Blah");
 	System.out.println(a);	
 	a.add(2, "insertion");
 	System.out.println(a);	
-	a.remove(2);
+	a.insertionSort();
 	System.out.println(a);
 
     }
