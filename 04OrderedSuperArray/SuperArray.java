@@ -31,7 +31,7 @@ public class SuperArray{
 	    }
     }
 
-    public void add(int index, String o){
+    public void add(int index, Object o){
 	if(index < 0 || index > size() ){
 	    throw new IndexOutOfBoundsException();
 	}				
@@ -106,7 +106,14 @@ public class SuperArray{
 	return stuff.length;
     }
 
-    public static void insertionSort(){
+    public void insertionSort(){
+	for (int i = 1; i < size(); i++){
+	    String x = (String)stuff[i];
+	    int j = i;
+	    while (j > 0 && ((String)stuff[j-1]).compareTo(x) > 0){
+		stuff[j] = (String)stuff[j-1];
+		j = j - 1;}
+	    stuff[j] = x;}
     }
 
 
@@ -114,20 +121,20 @@ public class SuperArray{
 	SuperArray a = new SuperArray(5);
 	System.out.println(a);
 	System.out.println(a.size());
-	a.add("Test");
+	a.add("Abe");
 	System.out.println(a);
        	System.out.println(a.size());
-       	a.add("Blah");
+       	a.add("Aaron");
 	System.out.println(a);
        	System.out.println(a.size());
 	a.resize(3);
 	System.out.println(a);
-	a.add("Apple");
+	a.add("Donny");
 	System.out.println(a);
-	a.add("Bob");
-	a.add("Blah");
+	a.add("Billy");
+	a.add("Charles");
 	System.out.println(a);	
-	a.add(2, "insertion");
+	a.add(2, "Joe");
 	System.out.println(a);	
 	a.insertionSort();
 	System.out.println(a);
