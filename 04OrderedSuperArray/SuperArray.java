@@ -106,6 +106,15 @@ public class SuperArray{
 	return stuff.length;
     }
 
+    public int find(String target){
+	for(int i = 0; i < size(); i++){
+	    if (target.equals((String) stuff[i])){
+		    return i;
+	    }
+	}
+	return -1;
+    }
+
     public void insertionSort(){
 	for (int i = 1; i < size(); i++){
 	    String x = (String)stuff[i];
