@@ -1,13 +1,16 @@
 public class SuperArray{
-    Object[] stuff;
+    String[] stuff;
     int currentLength;
 
     public SuperArray(){
-	stuff = new Object[10];
+	stuff = new String[10];
     }
     
     public SuperArray(int length){
-       	stuff = new Object[length];
+       	stuff = new String[length];
+	for (int i = 0; i <stuff.length; i++){
+	    stuff[i] = "" + i + " ";
+	}
     }
 
     public String toString(){
@@ -19,7 +22,7 @@ public class SuperArray{
 	return ans;
     }
 
-    public void add(Object e){
+    public void add(String e){
 	if (size() == getLength()){
 	    resize(size() + 1);
 	}
@@ -31,7 +34,7 @@ public class SuperArray{
 	    }
     }
 
-    public void add(int index, Object o){
+    public void add(int index, String o){
 	if(index < 0 || index > size() ){
 	    throw new IndexOutOfBoundsException();
 	}				
@@ -56,7 +59,7 @@ public class SuperArray{
     }
 
     public void resize(int newCapacity){
-	Object[] copy = new Object[newCapacity];
+	String[] copy = new String[newCapacity];
 	if (stuff.length < copy.length){
 	    for (int i = 0; i < stuff.length; i++){
 		copy[i] = stuff[i];
@@ -74,26 +77,25 @@ public class SuperArray{
 	    stuff[i] = null;
 	}
     }
-
-    public Object get(int index){
+    public String get(int index){
 	if(index < 0  || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
 	return stuff[index];
     }
 
-    public Object set(int index, Object e){
+    public String set(int index, String e){
 	if( index < 0  || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
-	Object a = stuff[index];
+	String a = stuff[index];
 	stuff[index] = e;
 	return a;	    
     }
 
-    public Object remove(int index){
-	Object a = stuff[index];
-	Object[] copy = new Object[stuff.length];
+    public String remove(int index){
+	String a = stuff[index];
+	String[] copy = new String[stuff.length];
 	for(int i = 0; i < index; i ++){
 	    copy[i] = stuff[i];}
 	for(int q = index + 1; q < stuff.length; q++){
@@ -125,28 +127,24 @@ public class SuperArray{
 	    stuff[j] = x;}
     }
 
+    public void selectionSort(){
+	for (int i = 1; i < size(); i++){
+	    String x = stuff[i];
+	    int index = i;
+	    for (int q = i; q < size(); q++){
+		if (x.compareTo(stuff[q]) > 0){
+		    x = stuff[q];
+		    index = q;
+		}
+	    }
+	    String swap = stuff[i];
+	    stuff[i] = x;
+	    stuff[index] = swap;
+	}
+    }
 
     public static void main(String[]args){
-	SuperArray a = new SuperArray(5);
-	System.out.println(a);
-	System.out.println(a.size());
-	a.add("Abe");
-	System.out.println(a);
-       	System.out.println(a.size());
-       	a.add("Aaron");
-	System.out.println(a);
-       	System.out.println(a.size());
-	a.resize(3);
-	System.out.println(a);
-	a.add("Donny");
-	System.out.println(a);
-	a.add("Billy");
-	a.add("Charles");
-	System.out.println(a);	
-	a.add(2, "Joe");
-	System.out.println(a);	
-	a.insertionSort();
-	System.out.println(a);
-
+	SuperArray a = new SuperArray(500000);
+	a.selectionSort();
     }
 }
