@@ -1,1 +1,39 @@
- 
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+public class CtoF extends JFrame implements ActionListener{
+private Container pane;
+
+private JButton b;
+private JLabel l;
+private JTextField t;
+private JCheckBox c;
+    public CtoF() {
+	this.setTitle("Converter");
+	this.setSize(750,75);
+	this.setLocation(100,100);
+	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+	
+	pane = this.getContentPane();
+	pane.setLayout(new FlowLayout());
+
+	b = new JButton("Convert!");
+	l = new JLabel("Convert Celsius to Farenheit",null,JLabel.CENTER);
+	t = new JTextField(12);
+	c = new JCheckBox("Farenheit to Celsius insted");
+	pane.add(l);
+	pane.add(t);
+	pane.add(b);
+	pane.add(c);
+	b.addActionListener(this);
+	b.setActionCommand("Action")
+    }
+
+    public voidactionPerformed(ActionEvent e){}
+
+    public static void main(String[] args) {
+        CtoF g = new CtoF();
+        g.setVisible(true);
+    }
+}
