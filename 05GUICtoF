@@ -27,10 +27,24 @@ private JCheckBox c;
 	pane.add(b);
 	pane.add(c);
 	b.addActionListener(this);
-	b.setActionCommand("Action")
+	b.setActionCommand("Action");
     }
 
-    public voidactionPerformed(ActionEvent e){}
+    public void actionPerformed(ActionEvent e){
+	String action = e.getActionCommand();
+	if(action.equals("Action")){
+		String s = t.getText();
+		double ans = Double.parseDouble(s);
+		if (c.isSelected()){
+		    ans = ((ans - 32.00) / 1.8000);
+		}else{
+		    ans = ans* 1.8000 + 32.00;}
+		s = "" + ans;
+		t.setText(s);
+		    
+	    }
+
+}
 
     public static void main(String[] args) {
         CtoF g = new CtoF();
