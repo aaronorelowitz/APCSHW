@@ -1,6 +1,14 @@
 public class Sorts{
 
- public static void selection(int[]a) {
+    public static String name(){
+	return "Orelowitz, Aaron";
+    }
+
+    public static int period(){
+	return 7;
+    }
+
+    public static void selection(int[]a) {
 	for (int i = 1; i < a.length; i++){
 	    int x = a[i];
 	    int index = i;
@@ -41,6 +49,17 @@ public class Sorts{
                     x = true;
                 }
             }
-        }
+	}
+    }
+
+
+    public static void radix(int[]a){
+	boolean x = true;                                         
+        while (x) {
+	    int[][]b = b[10][];
+	    x = false;
+	    for (int i= 1; i < a.length; i ++) {
+
+	    }
     }
 }
